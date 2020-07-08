@@ -12,3 +12,4 @@ deploy:
      docker push "$DOCKER_USERNAME"/Webappdockertravis:latest
   on:
     branch: master  
+    
