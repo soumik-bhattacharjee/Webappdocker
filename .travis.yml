@@ -1,0 +1,14 @@
+arch: s390x
+services:
+  - docker
+script: 
+    docker build -t Webappdocker -f Dockerfile .
+before_deploy:
+    - docker tag  Webappdocker  "$DOCKER_USERNAME"/Webappdockertravis:latest
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin  
+deploy:
+  provider: script
+  script: 
+     docker push "$DOCKER_USERNAME"/Webappdockertravis:latest
+  on:
+    branch: master  
